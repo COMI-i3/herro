@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Portal</title>
+    <style>
+        :root {
+            --bg-color: #0f0f12;
+            --card-bg: #1a1a24;
+            --accent-color: #5865f2;
+            --text-color: #ffffff;
+            --text-muted: #a3a3b3;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #2a2a35;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            letter-spacing: 0.5px;
+        }
+
+        /* The Grid System */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        /* Dynamic Game Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #2a2a35;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 24px rgba(88, 101, 242, 0.15);
+        }
+
+        .card h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Fullscreen Theater View */
+        .theater-mode {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #000000;
+            z-index: 9999;
+        }
+
+        .controls {
+            height: 50px;
+            background-color: #111116;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            border-bottom: 1px solid #22222b;
+        }
+
+        .game-title {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .close-btn {
+            background-color: #e11d48;
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+
+        .close-btn:hover {
+            background-color: #be123c;
+        }
+
+        .iframe-wrapper {
+            width: 100%;
+            height: calc(100vh - 50px);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Navigation Hub -->
+    <div id="hubView">
+        <header>
+            <h1>Web Dashboard</h1>
+        </header>
+        <div class="container">
+            <div class="grid" id="gameGrid">
+                <!-- JavaScript automatically injects your links here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Live Game Screen Overlay -->
+    <div id="theaterView" class="theater-mode">
+        <div class="controls">
+            <span class="game-title" id="currentActiveTitle">Loading...</span>
+            <button class="close-btn" onclick="closeGame()">Exit Game</button>
+        </div>
+        <div class="iframe-wrapper">
+            <iframe id="gameIframe" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // JUST INSERT YOUR GAME LINKS HERE!
+        // ==========================================
+        const gameList = [
+            {
+                name: "Retro Bowl",
+                url: "https://github.io"
+            },
+            {
+                name: "1v1.LOL",
+                url: "https://github.io"
+            },
+            {
+                name: "Slope",
+                url: "https://github.io"
+            },
+            {
+                name: "Cookie Clicker",
+                url: "https://github.io"
+            }
+        ];
+
+        // ==========================================
+        // ENGINE (DO NOT TOUCH UNLESS MODIFYING)
+        // ==========================================
+        const grid = document.getElementById('gameGrid');
+        const hubView = document.getElementById('hubView');
+        const theaterView = document.getElementById('theaterView');
+        const gameIframe = document.getElementById('gameIframe');
+        const activeTitle = document.getElementById('currentActiveTitle');
+
+        // Dynamically build your catalog grid loop
+        function initializePortal() {
+            grid.innerHTML = ""; 
+            gameList.forEach((game) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => launchGame(game.name, game.url);
+                
+                card.innerHTML = `
+                    <h3>${game.name}</h3>
+                    <p>Click to launch</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function launchGame(name, url) {
+            hubView.style.display = 'none';
+            theaterView.style.display = 'block';
+            activeTitle.textContent = name;
+            gameIframe.src = url;
+        }
+
+        function closeGame() {
+            hubView.style.display = 'block';
+            theaterView.style.display = 'none';
+            gameIframe.src = ""; // Completely unloads frame to save RAM and halt sound
+        }
+
+        // Initialize grid on run
+        initializePortal();
+    </script>
+</body>
+</html>
