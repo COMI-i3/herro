@@ -187,5 +187,318 @@ document.getElementById("randomBtn").addEventListener("click",()=>{const playabl
 document.querySelectorAll("[data-jump-category]").forEach(a=>a.addEventListener("click",()=>{activeCategory="All";renderChips();renderGames()}));
 renderChips();renderGames();
 </script>
+  
+<!-- HERRO COMMUNITY -->
+<style>
+#herro-community {
+  background: #15151d;
+  color: white;
+  padding: 22px;
+  margin: 25px auto;
+  max-width: 850px;
+  border: 1px solid #343444;
+  border-radius: 14px;
+  font-family: Arial, sans-serif;
+}
+#herro-community input,
+#herro-community textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 11px;
+  margin: 5px 0;
+  border: 1px solid #444;
+  border-radius: 7px;
+  background: #22222d;
+  color: white;
+}
+#herro-community button {
+  background: #7548ed;
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 14px;
+  margin: 4px;
+  cursor: pointer;
+}
+#herro-community button:hover { opacity: .8; }
+#herro-chat {
+  height: 280px;
+  overflow-y: auto;
+  background: #101017;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.herro-message {
+  padding: 9px;
+  border-bottom: 1px solid #30303a;
+  overflow-wrap: anywhere;
+}
+.herro-muted { color: #aaa; font-size: 12px; }
+#herro-community h2 { margin-top: 8px; }
+</style>
+
+<section id="herro-community">
+  <h2>HERRO Community</h2>
+
+  <div id="herro-account">
+    <h3>Login or Create Account</h3>
+    <input id="herro-username" placeholder="Username">
+    <input id="herro-email" type="email" placeholder="Email">
+    <input id="herro-password" type="password" placeholder="Password">
+    <button id="herro-signup">Create Account</button>
+    <button id="herro-login">Login</button>
+    <p id="herro-status" class="herro-muted">
+      Sign in to join the community.
+    </p>
+  </div>
+
+  <div id="herro-logged-in" hidden>
+    <p>Logged in as <strong id="herro-current-user"></strong></p>
+    <button id="herro-logout">Log Out</button>
+
+    <h3>Player Directory</h3>
+    <div id="herro-players"></div>
+
+    <h3>Global Chat</h3>
+    <div id="herro-chat"></div>
+    <input id="herro-chat-input" maxlength="1000"
+      placeholder="Write a message...">
+    <button id="herro-send">Send Message</button>
+    <p id="herro-chat-status" class="herro-muted"></p>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async function () {
+  const SUPABASE_URL =
+    "https://gzudlkjghmplvgayayfo.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_hn2RubwgRir3_hvE6T91bg_ajhPeEOk";
+
+  const db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+  const $ = id => document.getElementById(id);
+  let currentUser = null;
+
+  function status(message) {
+    $("herro-status").textContent = message;
+  }
+
+  async function refreshAccount() {
+    const { data } = await db.auth.getUser();
+    currentUser = data.user;
+
+    $("herro-account").hidden = !!currentUser;
+    $("herro-logged-in").hidden = !currentUser;
+
+    if (!currentUser) return;
+
+    const { data: profile } = await db
+      .from("profiles")
+      .select("username")
+      .eq("id", currentUser.id)
+      .single();
+
+    $("herro-current-user").textContent =
+      profile?.username || currentUser.email;
+
+    await loadPlayers();
+    await loadChat();
+  }
+
+  $("herro-signup").onclick = async () => {
+    const username = $("herro-username").value.trim();
+    const email = $("herro-email").value.trim();
+    const password = $("herro-password").value;
+
+    if (!username || !email || password.length < 8) {
+      return status("Enter a username, email, and password (8+ characters).");
+    }
+
+    const { error } = await db.auth.signUp({
+      email,
+      password,
+      options: {
+        data: { username }
+      }
+    });
+
+    if (error) return status(error.message);
+
+    status("Account created! Check your email if verification is required.");
+    await refreshAccount();
+  };
+
+  $("herro-login").onclick = async () => {
+    const { error } = await db.auth.signInWithPassword({
+      email: $("herro-email").value.trim(),
+      password: $("herro-password").value
+    });
+
+    if (error) return status(error.message);
+
+    status("Welcome back!");
+    await refreshAccount();
+  };
+
+  $("herro-logout").onclick = async () => {
+    await db.auth.signOut();
+    location.reload();
+  };
+
+  async function loadPlayers() {
+    const { data, error } = await db
+      .from("profiles")
+      .select("id, username, bio")
+      .limit(100);
+
+    if (error) return;
+
+    $("herro-players").replaceChildren();
+
+    data.forEach(player => {
+      const card = document.createElement("div");
+      card.className = "herro-message";
+
+      const name = document.createElement("strong");
+      name.textContent = player.username;
+
+      const bio = document.createElement("p");
+      bio.textContent = player.bio || "HERRO player";
+
+      const report = document.createElement("button");
+      report.textContent = "Report Player";
+      report.onclick = () => reportPlayer(player.id);
+
+      card.append(name, bio);
+
+      if (player.id !== currentUser.id) {
+        card.append(report);
+      }
+
+      $("herro-players").append(card);
+    });
+  }
+
+  async function reportPlayer(userId) {
+    const reason = prompt(
+      "Why are you reporting this player?"
+    );
+
+    if (!reason) return;
+
+    const { error } = await db.from("user_reports").insert({
+      reporter_id: currentUser.id,
+      reported_user_id: userId,
+      reason: reason.slice(0, 100)
+    });
+
+    alert(error ? error.message : "Report submitted.");
+  }
+
+  async function loadChat() {
+    const { data, error } = await db
+      .from("chat_messages")
+      .select("id, user_id, message, created_at, profiles(username)")
+      .order("created_at", { ascending: true })
+      .limit(100);
+
+    if (error) {
+      $("herro-chat-status").textContent = error.message;
+      return;
+    }
+
+    $("herro-chat").replaceChildren();
+
+    data.forEach(msg => {
+      const item = document.createElement("div");
+      item.className = "herro-message";
+
+      const name = document.createElement("strong");
+      name.textContent =
+        msg.profiles?.username || "Player";
+
+      const content = document.createElement("p");
+      content.textContent = msg.message;
+
+      const report = document.createElement("button");
+      report.textContent = "Report";
+      report.onclick = async () => {
+        const reason = prompt("Why report this message?");
+        if (!reason) return;
+
+        const { error } = await db.from("user_reports").insert({
+          reporter_id: currentUser.id,
+          reported_user_id: msg.user_id,
+          message_id: msg.id,
+          reason: reason.slice(0, 100)
+        });
+
+        alert(error ? error.message : "Report submitted.");
+      };
+
+      item.append(name, content);
+
+      if (msg.user_id !== currentUser.id) {
+        item.append(report);
+      }
+
+      $("herro-chat").append(item);
+    });
+
+    $("herro-chat").scrollTop =
+      $("herro-chat").scrollHeight;
+  }
+
+  $("herro-send").onclick = async () => {
+    const input = $("herro-chat-input");
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    $("herro-chat-status").textContent = "Sending...";
+
+    const { error } = await db.from("chat_messages").insert({
+      user_id: currentUser.id,
+      message
+    });
+
+    if (error) {
+      $("herro-chat-status").textContent = error.message;
+      return;
+    }
+
+    input.value = "";
+    $("herro-chat-status").textContent = "";
+    await loadChat();
+  };
+
+  $("herro-chat-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") $("herro-send").click();
+  });
+
+  db.channel("herro-live-chat")
+    .on("postgres_changes", {
+      event: "*",
+      schema: "public",
+      table: "chat_messages"
+    }, loadChat)
+    .subscribe();
+
+  db.auth.onAuthStateChange(() => {
+    setTimeout(refreshAccount, 0);
+  });
+
+  await refreshAccount();
+})();
+</script>
+<!-- END HERRO COMMUNITY -->
+
 </body>
 </html>
