@@ -261,8 +261,7 @@ renderChips();renderGames();
   const SUPABASE_URL="https://gzudlkjghmplvgayayfo.supabase.co";
   const SUPABASE_KEY="sb_publishable_hn2RubwgRir3_hvE6T91bg_ajhPeEOk";
   const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-  const $=id=>document.getElementById(id);
-  let user=null, profile=null, chatChannel=null, dmChannel=null, activeDmUser=null;
+  const $=id=>document.getElementById(id);let user=null, profile=null, chatChannel=null, dmChannel=null, activeDmUser=null, friendsLoadToken=0;
   const say=(id,msg)=>{if($(id))$(id).textContent=msg||""};
   const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
   const roleLabel=r=>({owner:"Owner",mod:"Moderator",member:"Member"}[r]||"Member");
@@ -314,8 +313,86 @@ renderChips();renderGames();
   async function sendRequest(id){const {data:rows,error}=await db.from("friend_requests").select("id,requester_id,addressee_id,status").or(`and(requester_id.eq.${user.id},addressee_id.eq.${id}),and(requester_id.eq.${id},addressee_id.eq.${user.id})`);if(error){alert(error.message);return;}if((rows||[]).some(r=>r.status==="accepted")){alert("You're already friends!");return;}if((rows||[]).some(r=>r.status==="pending")){alert("A friend request is already pending.");return;}const {error:insertError}=await db.from("friend_requests").insert({requester_id:user.id,addressee_id:id,status:"pending"});if(insertError){alert(insertError.message);return;}await loadRequests();alert("Friend request sent!");}
   async function loadRequests(){const [{data:incoming,error:e1},{data:outgoing,error:e2}]=await Promise.all([db.from("friend_requests").select("id,requester_id,created_at").eq("addressee_id",user.id).eq("status","pending").order("created_at",{ascending:false}),db.from("friend_requests").select("id,addressee_id,created_at").eq("requester_id",user.id).eq("status","pending").order("created_at",{ascending:false})]);const host=$("herro-requests");host.replaceChildren();if(e1||e2){host.textContent=(e1||e2).message;return;}const ids=[...(incoming||[]).map(x=>x.requester_id),...(outgoing||[]).map(x=>x.addressee_id)],profiles=await getProfiles(ids);(incoming||[]).forEach(r=>{const card=el("div","herro-item"),name=el("strong",null,profiles[r.requester_id]?.username||"Player"),accept=el("button","herro-btn","Accept"),decline=el("button","herro-btn secondary","Decline");accept.onclick=()=>respond(r.id,"accepted");decline.onclick=()=>respond(r.id,"declined");card.append(name,el("div","herro-muted"," wants to be your friend"),accept,decline);host.append(card);});(outgoing||[]).forEach(r=>host.append(el("div","herro-item","Request sent to "+(profiles[r.addressee_id]?.username||"Player"))));if(!host.children.length)host.textContent="No pending friend requests.";}
   async function respond(id,status){const {error}=await db.from("friend_requests").update({status}).eq("id",id).eq("addressee_id",user.id).eq("status","pending");if(error){alert(error.message);return;}await Promise.all([loadRequests(),loadFriends()]);}
-  async function loadFriends(){const {data,error}=await db.from("friend_requests").select("id,requester_id,addressee_id").eq("status","accepted").or(`requester_id.eq.${user.id},addressee_id.eq.${user.id}`).order("created_at",{ascending:false});const host=$("herro-friends");host.replaceChildren();if(error){host.textContent=error.message;return;}const ids=(data||[]).map(r=>r.requester_id===user.id?r.addressee_id:r.requester_id),profiles=await getProfiles(ids);(data||[]).forEach(r=>{const id=r.requester_id===user.id?r.addressee_id:r.requester_id,p=profiles[id]||{},card=el("div","herro-person"),head=el("div","herro-person-head"),pic=el("img","herro-avatar");avatar(pic,p.avatar_url,p.username);head.append(pic,el("strong","herro-name",p.username||"Player"));const message=el("button","herro-btn","Message");message.onclick=()=>openDm(id,p.username);const remove=el("button","herro-btn secondary","Remove friend");remove.onclick=async()=>{if(!confirm("Remove this friend?"))return;const {error}=await db.from("friend_requests").delete().eq("id",r.id);if(error)alert(error.message);else{await loadFriends();if(activeDmUser===id){activeDmUser=null;$("herro-dm-thread").textContent="Friend removed. Choose another friend.";$("herro-dm-input").disabled=true;$("herro-dm-send").disabled=true;}}};card.append(head,message,remove);host.append(card);});if(!host.children.length)host.textContent="You haven't added any friends yet.";}
-  async function loadDmFriends(){
+ async function loadFriends(){
+  const token = ++friendsLoadToken;
+
+  const {data,error}=await db.from("friend_requests")
+    .select("id,requester_id,addressee_id")
+    .eq("status","accepted")
+    .or(`requester_id.eq.${user.id},addressee_id.eq.${user.id}`)
+    .order("created_at",{ascending:false});
+
+  const host=$("herro-friends");
+
+  if(token !== friendsLoadToken) return;
+
+  if(error){
+    host.textContent=error.message;
+    return;
+  }
+
+  const uniqueFriends = new Map();
+
+  (data||[]).forEach(r=>{
+    const id = r.requester_id===user.id
+      ? r.addressee_id
+      : r.requester_id;
+
+    if(id && !uniqueFriends.has(id)){
+      uniqueFriends.set(id,r);
+    }
+  });
+
+  const ids=[...uniqueFriends.keys()];
+  const profiles=await getProfiles(ids);
+
+  if(token !== friendsLoadToken) return;
+
+  host.replaceChildren();
+
+  ids.forEach(id=>{
+    const r=uniqueFriends.get(id);
+    const p=profiles[id]||{};
+    const card=el("div","herro-person");
+    const head=el("div","herro-person-head");
+    const pic=el("img","herro-avatar");
+
+    avatar(pic,p.avatar_url,p.username);
+    head.append(pic,el("strong","herro-name",p.username||"Player"));
+
+    const message=el("button","herro-btn","Message");
+    message.onclick=()=>openDm(id,p.username);
+
+    const remove=el("button","herro-btn secondary","Remove friend");
+    remove.onclick=async()=>{
+      if(!confirm("Remove this friend?"))return;
+
+      const {error}=await db.from("friend_requests")
+        .delete().eq("id",r.id);
+
+      if(error){
+        alert(error.message);
+      }else{
+        await loadFriends();
+        await loadDmFriends();
+
+        if(activeDmUser===id){
+          activeDmUser=null;
+          $("herro-dm-thread").textContent="Friend removed. Choose another friend.";
+          $("herro-dm-input").disabled=true;
+          $("herro-dm-send").disabled=true;
+        }
+      }
+    };
+
+    card.append(head,message,remove);
+    host.append(card);
+  });
+
+  if(!ids.length){
+    host.textContent="You haven't added any friends yet.";
+  }
+} async function loadDmFriends(){
     if(!user)return;
     const {data,error}=await db.from("friend_requests").select("requester_id,addressee_id").eq("status","accepted").or(`requester_id.eq.${user.id},addressee_id.eq.${user.id}`);
     const host=$("herro-dm-list");
