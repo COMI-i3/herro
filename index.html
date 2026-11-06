@@ -304,51 +304,12 @@ renderChips();renderGames();
   $("herro-login").onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$("herro-email").value.trim(),password:$("herro-password").value});if(error){say("herro-auth-status",error.message);return;}try{await refresh();}catch(e){say("herro-auth-status",e.message);}};
   $("herro-logout").onclick=async()=>{const {error}=await db.auth.signOut();if(error){say("herro-auth-status",error.message);return;}profile=null;await refresh();};
   async function loadPlayers(){
-  const {data,error}=await db.from("profiles")
-    .select("id,username,bio,avatar_url,role")
-    .order("username")
-    .limit(100);
-
-  if(error){
-    $("herro-players").textContent=error.message;
-    return;
+    const {data,error}=await db.from("profiles").select("id,username,bio,avatar_url,role").order("username").limit(100);if(error){$("herro-players").textContent=error.message;return;}
+    const host=$("herro-players");host.replaceChildren();(data||[]).filter(p=>p.id!==user.id).forEach(p=>{
+      const card=el("div","herro-person"),head=el("div","herro-person-head"),pic=el("img","herro-avatar");avatar(pic,p.avatar_url,p.username);const details=el("div");const name=el("div","herro-name",p.username||"Player");name.append(el("span","herro-role",roleLabel(p.role)));details.append(name,el("div","herro-muted",p.bio||"HERRO player"));head.append(pic,details);card.append(head);
+      const add=el("button","herro-btn","Add Friend");add.type="button";add.onclick=()=>sendRequest(p.id);card.append(add);host.append(card);
+    });if(!host.children.length)host.textContent="No other players yet. Share HERRO with a friend!";
   }
-
-  const host=$("herro-players");
-  host.replaceChildren();
-
-  (data||[]).filter(p=>p.id!==user.id).forEach(p=>{
-    const card=el("div","herro-person");
-    const head=el("div","herro-person-head");
-    const pic=el("img","herro-avatar");
-    avatar(pic,p.avatar_url,p.username);
-
-    const details=el("div");
-    const name=el("div","herro-name",p.username||"Player");
-    name.append(el("span","herro-role",roleLabel(p.role)));
-
-    details.append(name,el("div","herro-muted",p.bio||"HERRO player"));
-    head.append(pic,details);
-    card.append(head);
-
-    card.style.cursor="pointer";
-    card.onclick=()=>openProfile(p.id);
-
-    const add=el("button","herro-btn","Add Friend");
-    add.type="button";
-    add.onclick=(e)=>{
-      e.stopPropagation();
-      sendRequest(p.id);
-    };
-
-    card.append(add);
-    host.append(card);
-  });
-
-  if(!host.children.length){
-    host.textContent="No other players yet. Share HERRO with a friend!";
-  }
-}
   async function sendRequest(id){const {data:rows,error}=await db.from("friend_requests").select("id,requester_id,addressee_id,status").or(`and(requester_id.eq.${user.id},addressee_id.eq.${id}),and(requester_id.eq.${id},addressee_id.eq.${user.id})`);if(error){alert(error.message);return;}if((rows||[]).some(r=>r.status==="accepted")){alert("You're already friends!");return;}if((rows||[]).some(r=>r.status==="pending")){alert("A friend request is already pending.");return;}const {error:insertError}=await db.from("friend_requests").insert({requester_id:user.id,addressee_id:id,status:"pending"});if(insertError){alert(insertError.message);return;}await loadRequests();alert("Friend request sent!");}
   async function loadRequests(){const [{data:incoming,error:e1},{data:outgoing,error:e2}]=await Promise.all([db.from("friend_requests").select("id,requester_id,created_at").eq("addressee_id",user.id).eq("status","pending").order("created_at",{ascending:false}),db.from("friend_requests").select("id,addressee_id,created_at").eq("requester_id",user.id).eq("status","pending").order("created_at",{ascending:false})]);const host=$("herro-requests");host.replaceChildren();if(e1||e2){host.textContent=(e1||e2).message;return;}const ids=[...(incoming||[]).map(x=>x.requester_id),...(outgoing||[]).map(x=>x.addressee_id)],profiles=await getProfiles(ids);(incoming||[]).forEach(r=>{const card=el("div","herro-item"),name=el("strong",null,profiles[r.requester_id]?.username||"Player"),accept=el("button","herro-btn","Accept"),decline=el("button","herro-btn secondary","Decline");accept.onclick=()=>respond(r.id,"accepted");decline.onclick=()=>respond(r.id,"declined");card.append(name,el("div","herro-muted"," wants to be your friend"),accept,decline);host.append(card);});(outgoing||[]).forEach(r=>host.append(el("div","herro-item","Request sent to "+(profiles[r.addressee_id]?.username||"Player"))));if(!host.children.length)host.textContent="No pending friend requests.";}
   async function respond(id,status){const {error}=await db.from("friend_requests").update({status}).eq("id",id).eq("addressee_id",user.id).eq("status","pending");if(error){alert(error.message);return;}await Promise.all([loadRequests(),loadFriends()]);}
