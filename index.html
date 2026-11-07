@@ -9,7 +9,7 @@
 <style>
 :root{color-scheme:dark;--bg:#090b12;--panel:#111522;--panel2:#171c2d;--line:#262d42;--text:#f3f5ff;--muted:#a0a8c0;--accent:#8b5cf6;--accent2:#22d3ee;--radius:17px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 70% -20%,#24204a 0,transparent 42%),var(--bg);color:var(--text);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;min-height:100vh}
-button,input,select{font:inherit}button,a{ -webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}
+button,input,select{font:inherit}button,a{-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}
 .topbar{position:sticky;top:0;z-index:20;backdrop-filter:blur(16px);background:#090b12e8;border-bottom:1px solid #ffffff12}
 .nav{max-width:1280px;margin:auto;padding:14px 22px;display:flex;align-items:center;gap:20px}
 .brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:.12em;font-size:20px;white-space:nowrap}.brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 5px 24px #8b5cf633}
@@ -53,21 +53,18 @@ dialog::backdrop{background:#03040bcc;backdrop-filter:blur(5px)}
 @media(max-width:1050px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.navlinks{display:none}}
 @media(max-width:760px){main{padding:18px 14px 50px}.nav{padding:11px 14px}.status{display:none}.hero{border-radius:20px}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.cover{height:105px}.cover-icon{font-size:38px}.card-body{padding:10px}.game-name{font-size:13px}.game-meta{font-size:10px}}
 @media(max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cover{height:115px}.hero p{font-size:14px}.toolbar select{flex:1}.brand{font-size:17px}}
-
-/* HERRO community: profiles, friends, achievements, roles and chat */
-#herro-community{margin:34px 0 10px;padding:22px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(180deg,#151a2a,#10131e)}
-#herro-community h2{margin:0 0 6px;font-size:25px}#herro-community h3{margin:0 0 10px}
-.herro-muted{color:var(--muted);font-size:13px}.herro-panel{margin-top:18px;padding:16px;border:1px solid var(--line);border-radius:14px;background:#0d111d}
-.herro-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.herro-field{display:flex;flex-direction:column;gap:5px;color:var(--muted);font-size:12px;font-weight:700}
-#herro-community input,#herro-community textarea{width:100%;min-width:0;padding:11px;border:1px solid var(--line);border-radius:9px;background:#090d17;color:var(--text)}
-#herro-community textarea{min-height:75px;resize:vertical}.herro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.herro-btn{border:1px solid #ffffff18;border-radius:9px;background:#302454;color:#fff;padding:9px 12px;font-weight:750;cursor:pointer}.herro-btn.secondary{background:#171c2d}.herro-btn:disabled{opacity:.5;cursor:not-allowed}
-.herro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.herro-person,.herro-item{padding:12px;border:1px solid var(--line);border-radius:12px;background:#111522;overflow-wrap:anywhere}
-.herro-person-head{display:flex;align-items:center;gap:10px}.herro-avatar{width:48px;height:48px;flex:0 0 48px;display:grid;place-items:center;border-radius:50%;object-fit:cover;background:linear-gradient(135deg,#7c3aed,#0891b2);font-size:21px;font-weight:900}
-.herro-name{font-weight:850}.herro-role{display:inline-block;margin-left:6px;padding:3px 7px;border:1px solid #ffffff22;border-radius:99px;color:#c4b5fd;font-size:10px;text-transform:uppercase;letter-spacing:.06em}
-.herro-achievement{display:flex;gap:10px;align-items:center}.herro-achievement-icon{font-size:25px}.herro-chat{height:250px;overflow:auto;padding:10px;border:1px solid var(--line);border-radius:10px;background:#090d17}.herro-chat-line{padding:8px 3px;border-bottom:1px solid #ffffff12;overflow-wrap:anywhere}.herro-chat-line p{margin:3px 0}.herro-dm-layout{display:grid;grid-template-columns:minmax(150px,220px) 1fr;gap:12px}.herro-dm-list{display:grid;gap:7px;align-content:start}.herro-dm-user{text-align:left;width:100%;background:#171c2d;border:1px solid var(--line);border-radius:9px;padding:10px;color:var(--text);cursor:pointer}.herro-dm-user.active{border-color:#8b5cf6;background:#292044}.herro-dm-thread{min-height:220px;max-height:320px;overflow:auto;padding:10px;border:1px solid var(--line);border-radius:10px;background:#090d17}.herro-dm-message{max-width:85%;margin:7px 0;padding:9px 11px;border-radius:12px;background:#171c2d;overflow-wrap:anywhere}.herro-dm-message.mine{margin-left:auto;background:#302454}.herro-dm-message small{display:block;color:var(--muted);font-size:10px;margin-bottom:3px}.herro-status{min-height:18px;color:#a7f3d0;font-size:12px}.herro-avatar-preview{display:flex;align-items:center;gap:12px;margin:10px 0}
-@media(max-width:560px){.herro-fields{grid-template-columns:1fr}#herro-community{padding:14px}.herro-dm-layout{grid-template-columns:1fr}.herro-dm-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
-
+/* HERRO COMMUNITY */
+#herro-community{background:#15151d;color:white;padding:22px;margin:25px auto;max-width:850px;border:1px solid #343444;border-radius:14px;font-family:Arial,sans-serif}
+#herro-community input,#herro-community textarea{box-sizing:border-box;width:100%;padding:11px;margin:5px 0;border:1px solid #444;border-radius:7px;background:#22222d;color:white}
+#herro-community button{background:#7548ed;color:white;border:0;border-radius:7px;padding:10px 14px;margin:4px;cursor:pointer}
+#herro-community button:hover{opacity:.8}
+#herro-chat{height:280px;overflow-y:auto;background:#101017;padding:12px;border-radius:8px;margin:12px 0}
+.herro-message{padding:9px;border-bottom:1px solid #30303a;overflow-wrap:anywhere}
+.herro-muted{color:#aaa;font-size:12px}
+#herro-community h2{margin-top:8px}
+.herro-community-section{margin-top:24px;padding-top:12px;border-top:1px solid #343444}
+.herro-message button{font-size:12px}
+.herro-inline-status{color:#b9f8df;font-size:12px}
 </style>
 </head>
 <body>
@@ -102,57 +99,48 @@ dialog::backdrop{background:#03040bcc;backdrop-filter:blur(5px)}
   </section>
   <aside class="note"><strong>Heads up:</strong> Games are hosted by their linked projects, not by this homepage. Some sites block embedded playback or may need extra files, so use <strong>Open Game</strong> if the player does not load. Save progress and performance depend on each game.</aside>
 
-  <section id="herro-community" aria-label="HERRO community">
+  <!-- HERRO COMMUNITY -->
+  <section id="herro-community">
     <h2>HERRO Community</h2>
-    <p class="herro-muted">Make a profile, add friends, earn achievements, and chat with other players.</p>
-    <div id="herro-auth" class="herro-panel">
-      <h3>Join HERRO</h3>
-      <div class="herro-fields">
-        <label class="herro-field">Username<input id="herro-username" maxlength="24" autocomplete="username" placeholder="Your username"></label>
-        <label class="herro-field">Email<input id="herro-email" type="email" autocomplete="email" placeholder="you@example.com"></label>
-        <label class="herro-field">Password<input id="herro-password" type="password" autocomplete="current-password" placeholder="At least 8 characters"></label>
-      </div>
-      <div class="herro-actions"><button class="herro-btn" id="herro-signup" type="button">Create account</button><button class="herro-btn secondary" id="herro-login" type="button">Log in</button></div>
-      <p id="herro-auth-status" class="herro-status" aria-live="polite">Sign in to use community features.</p>
+    <div id="herro-account">
+      <h3>Login or Create Account</h3>
+      <input id="herro-username" placeholder="Username" maxlength="24">
+      <input id="herro-email" type="email" placeholder="Email">
+      <input id="herro-password" type="password" placeholder="Password">
+      <button id="herro-signup">Create Account</button>
+      <button id="herro-login">Login</button>
+      <p id="herro-status" class="herro-muted">Sign in to join the community.</p>
     </div>
-    <div id="herro-member" hidden>
-      <div class="herro-panel">
-        <div class="herro-person-head"><img id="herro-my-avatar" class="herro-avatar" alt="Your avatar"><div><div class="herro-name" id="herro-my-name">Player</div><div id="herro-my-role" class="herro-muted">Member</div></div></div>
-        <div class="herro-actions"><button class="herro-btn secondary" id="herro-logout" type="button">Log out</button></div>
+
+    <div id="herro-logged-in" hidden>
+      <p>Logged in as <strong id="herro-current-user"></strong></p>
+      <button id="herro-logout">Log Out</button>
+
+      <div class="herro-community-section">
+        <h3>Player Directory</h3>
+        <p class="herro-muted">Find players and send friend requests.</p>
+        <div id="herro-players"></div>
       </div>
-      <div class="herro-panel">
-        <h3>Customize your profile</h3>
-        <div class="herro-fields">
-          <label class="herro-field">Display name<input id="herro-edit-name" maxlength="24"></label>
-          <label class="herro-field">Avatar image<input id="herro-avatar-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif"></label>
-        </div>
-        <label class="herro-field" style="margin-top:10px">About me<textarea id="herro-bio" maxlength="180" placeholder="Tell everyone a little about yourself..."></textarea></label>
-        <div class="herro-actions"><button class="herro-btn" id="herro-save-profile" type="button">Save profile</button></div>
-        <p id="herro-profile-status" class="herro-status" aria-live="polite"></p>
+
+      <div class="herro-community-section">
+        <h3>Friend Requests</h3>
+        <div id="herro-requests"></div>
       </div>
-      <div class="herro-panel"><h3>Player Directory</h3><p class="herro-muted">Find players and send friend requests.</p><div id="herro-players" class="herro-grid"></div></div>
-      <div class="herro-panel"><h3>Friend Requests</h3><div id="herro-requests" class="herro-grid"></div></div>
-      <div class="herro-panel"><h3>Your Friends</h3><div id="herro-friends" class="herro-grid"></div></div>
-      <div class="herro-panel">
-        <h3>Direct Messages</h3>
-        <p class="herro-muted">Private conversations with your accepted friends.</p>
-        <div class="herro-dm-layout">
-          <div id="herro-dm-list" class="herro-dm-list"><p class="herro-muted">Add friends to start chatting.</p></div>
-          <div>
-            <div id="herro-dm-thread" class="herro-dm-thread" aria-live="polite">Choose a friend to open a conversation.</div>
-            <div class="herro-actions">
-              <input id="herro-dm-input" maxlength="1000" placeholder="Message your friend..." style="flex:1" disabled>
-              <button class="herro-btn" id="herro-dm-send" type="button" disabled>Send</button>
-            </div>
-            <p id="herro-dm-status" class="herro-status" aria-live="polite"></p>
-          </div>
-        </div>
+
+      <div class="herro-community-section">
+        <h3>Friends</h3>
+        <div id="herro-friends"></div>
       </div>
-      <div class="herro-panel"><h3>Achievements</h3><p class="herro-muted">Achievements awarded by HERRO staff appear here.</p><div id="herro-achievements" class="herro-grid"></div></div>
-      <div class="herro-panel"><h3>Global Chat</h3><div id="herro-chat" class="herro-chat" aria-live="polite"></div><div class="herro-actions"><input id="herro-chat-input" maxlength="500" placeholder="Write a message..." style="flex:1"><button class="herro-btn" id="herro-send" type="button">Send</button></div><p id="herro-chat-status" class="herro-status" aria-live="polite"></p></div>
+
+      <div class="herro-community-section">
+        <h3>Global Chat</h3>
+        <div id="herro-chat"></div>
+        <input id="herro-chat-input" maxlength="1000" placeholder="Write a message...">
+        <button id="herro-send">Send Message</button>
+        <p id="herro-chat-status" class="herro-muted"></p>
+      </div>
     </div>
   </section>
-
 </main>
 <footer><span>HERRO • Browser game library</span><span>Fan-made directory. Game names and linked projects belong to their respective owners.</span></footer>
 
@@ -163,6 +151,25 @@ dialog::backdrop{background:#03040bcc;backdrop-filter:blur(5px)}
   </div>
   <div class="player-foot"><small id="playerHint">If embedding is blocked, open the game directly in a new tab.</small><button class="btn btn-primary" id="openExternal">↗ Open Game</button><button class="btn" id="reloadGame">↻ Reload</button></div>
 </dialog>
+
+<dialog id="herro-profile-modal" aria-labelledby="herro-profile-title" style="max-width:520px">
+  <div class="player-head">
+    <strong class="player-title" id="herro-profile-title">Player Profile</strong>
+    <button class="icon-btn" id="herro-profile-close" type="button" aria-label="Close profile">✕</button>
+  </div>
+  <div style="padding:20px">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div id="herro-profile-avatar" style="width:64px;height:64px;flex:0 0 64px;border-radius:50%;display:grid;place-items:center;background:#302454;font-size:25px;font-weight:900">?</div>
+      <div><h2 id="herro-profile-name" style="margin:0">Loading...</h2><div id="herro-profile-role" class="herro-muted"></div></div>
+    </div>
+    <p id="herro-profile-bio" style="margin:18px 0">Loading bio...</p>
+    <h3>Achievements</h3>
+    <div id="herro-profile-achievements" class="herro-message">Loading achievements...</div>
+    <div class="herro-actions"><button class="herro-btn" id="herro-profile-add" type="button">Add Friend</button><button class="herro-btn secondary" id="herro-profile-report" type="button">Report Player</button></div>
+    <p id="herro-profile-status" class="herro-muted"></p>
+  </div>
+</dialog>
+
 <script>
 const games = [
   {name:"20 Minutes",url:"https://comi3.github.io/20-minutes/",category:"Action",icon:"⏱️",colors:["#4c1d95","#be123c"]},
@@ -203,10 +210,18 @@ const games = [
   {name:"Totally Accurate Battle Simulator",url:"https://comi3.github.io/tabs/",category:"Strategy",icon:"⚔️",colors:["#4338ca","#be123c"]},
   {name:"Untitled Goose Game",url:"https://comi-i3.github.io/untitled-goose-game/",category:"Casual",icon:"🪿",colors:["#a16207","#166534"]}
 ];
-const grid=document.getElementById("gameGrid"), search=document.getElementById("search"), chips=document.getElementById("chips"), sort=document.getElementById("sort"), count=document.getElementById("count"), sectionTitle=document.getElementById("sectionTitle");
+
+const grid=document.getElementById("gameGrid"),search=document.getElementById("search"),chips=document.getElementById("chips"),sort=document.getElementById("sort"),count=document.getElementById("count"),sectionTitle=document.getElementById("sectionTitle");
 const categories=["All",...new Set(games.map(g=>g.category))];
-let activeCategory="All", currentGame=null;
-function makeChip(category){const b=document.createElement("button");b.className="chip"+(category===activeCategory?" active":"");b.textContent=category;b.type="button";b.addEventListener("click",()=>{activeCategory=category;renderChips();renderGames()});return b}
+let activeCategory="All",currentGame=null;
+
+function makeChip(category){
+ const b=document.createElement("button");
+ b.className="chip"+(category===activeCategory?" active":"");
+ b.textContent=category;b.type="button";
+ b.addEventListener("click",()=>{activeCategory=category;renderChips();renderGames()});
+ return b;
+}
 function renderChips(){chips.replaceChildren(...categories.map(makeChip))}
 function cardFor(g){
  const article=document.createElement("article");article.className="game-card";
@@ -217,22 +232,28 @@ function cardFor(g){
  cover.append(tag,icon,letter);
  const body=document.createElement("div");body.className="card-body";
  const name=document.createElement("div");name.className="game-name";name.textContent=g.name;
- const meta=document.createElement("div");meta.className="game-meta";const cat=document.createElement("span");cat.textContent=g.category;const kind=document.createElement("span");kind.textContent=g.url?"↗ Play":"Unavailable";meta.append(cat,kind);
+ const meta=document.createElement("div");meta.className="game-meta";
+ const cat=document.createElement("span");cat.textContent=g.category;
+ const kind=document.createElement("span");kind.textContent=g.url?"↗ Play":"Unavailable";
+ meta.append(cat,kind);
  const actions=document.createElement("div");actions.className="play-row";
  const play=document.createElement("button");play.className="play-btn";play.type="button";play.textContent=g.url?"▶ Play here":"Unavailable";play.disabled=!g.url;if(!g.url)play.style.opacity=".55";play.addEventListener("click",()=>launch(g));
  const blank=document.createElement("button");blank.className="play-btn";blank.type="button";blank.textContent="↗ about:blank";blank.disabled=!g.url;if(!g.url)blank.style.opacity=".55";blank.addEventListener("click",()=>openInBlankTab(g));
- actions.append(play,blank);body.append(name,meta,actions);article.append(cover,body);return article
+ actions.append(play,blank);body.append(name,meta,actions);article.append(cover,body);return article;
 }
 function renderGames(){
- const q=search.value.trim().toLowerCase();let filtered=games.filter(g=>(activeCategory==="All"||g.category===activeCategory)&&(`${g.name} ${g.category}`).toLowerCase().includes(q));
+ const q=search.value.trim().toLowerCase();
+ let filtered=games.filter(g=>(activeCategory==="All"||g.category===activeCategory)&&(`${g.name} ${g.category}`).toLowerCase().includes(q));
  filtered.sort((a,b)=>a.name.localeCompare(b.name));if(sort.value==="za")filtered.reverse();
- grid.replaceChildren();if(!filtered.length){const e=document.createElement("div");e.className="empty";e.textContent="No games found. Try another search or category.";grid.append(e)}else filtered.forEach(g=>grid.append(cardFor(g)));
- count.textContent=`${filtered.length} game${filtered.length===1?"":"s"}`;sectionTitle.textContent=activeCategory==="All"?"All games":activeCategory;
+ grid.replaceChildren();
+ if(!filtered.length){const e=document.createElement("div");e.className="empty";e.textContent="No games found. Try another search or category.";grid.append(e)}
+ else filtered.forEach(g=>grid.append(cardFor(g)));
+ count.textContent=`${filtered.length} game${filtered.length===1?"":"s"}`;
+ sectionTitle.textContent=activeCategory==="All"?"All games":activeCategory;
 }
 const dialog=document.getElementById("player"),frameWrap=document.getElementById("frameWrap"),playerTitle=document.getElementById("playerTitle"),playerHint=document.getElementById("playerHint");
 function openInBlankTab(g){
  if(!g?.url)return;
- // about:blank wrapper with the original game source clearly shown on the page.
  const tab=window.open("about:blank","_blank");
  if(!tab){alert("Allow pop-ups for this site, then try again.");return;}
  const esc=s=>String(s).replace(/[&<>\"]/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
@@ -241,10 +262,12 @@ function openInBlankTab(g){
  tab.document.close();
 }
 function launch(g){
- if(!g.url)return;currentGame=g;playerTitle.textContent=g.name;playerHint.textContent=g.note||"If the game blocks embedding, try the about:blank option on its card.";
- frameWrap.replaceChildren();const frame=document.createElement("iframe");frame.src=g.url;frame.title=g.name+" game";frame.allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";frame.allowFullscreen=true;frame.referrerPolicy="no-referrer-when-downgrade";frameWrap.append(frame);
+ if(!g.url)return;
+ currentGame=g;playerTitle.textContent=g.name;playerHint.textContent=g.note||"If the game blocks embedding, try the about:blank option on its card.";
+ frameWrap.replaceChildren();
+ const frame=document.createElement("iframe");frame.src=g.url;frame.title=g.name+" game";frame.allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write";frame.allowFullscreen=true;frame.referrerPolicy="no-referrer-when-downgrade";frameWrap.append(frame);
  if(typeof dialog.showModal==="function")dialog.showModal();else openInBlankTab(g);
- }
+}
 document.getElementById("openExternal").addEventListener("click",()=>{if(currentGame?.url)window.open(currentGame.url,"_blank","noopener,noreferrer")});
 document.getElementById("reloadGame").addEventListener("click",()=>{if(currentGame){dialog.close();launch(currentGame)}});
 document.getElementById("closePlayer").addEventListener("click",()=>{dialog.close();frameWrap.replaceChildren()});
@@ -261,218 +284,882 @@ renderChips();renderGames();
   const SUPABASE_URL="https://gzudlkjghmplvgayayfo.supabase.co";
   const SUPABASE_KEY="sb_publishable_hn2RubwgRir3_hvE6T91bg_ajhPeEOk";
   const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-  const $=id=>document.getElementById(id);let user=null, profile=null, chatChannel=null, dmChannel=null, activeDmUser=null, friendsLoadToken=0;
-  const say=(id,msg)=>{if($(id))$(id).textContent=msg||""};
-  const el=(tag,cls,text)=>{const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n};
-  const roleLabel=r=>({owner:"Owner",mod:"Moderator",member:"Member"}[r]||"Member");
-  function avatar(node,url,name){node.replaceChildren();if(url){node.src=url;node.alt=(name||"Player")+" avatar";node.hidden=false;}else{node.removeAttribute("src");node.alt=(name||"Player")+" avatar";node.hidden=true;node.textContent=(name||"P").slice(0,1).toUpperCase();}}
-  async function getProfiles(ids){const clean=[...new Set(ids.filter(Boolean))];if(!clean.length)return{};const {data,error}=await db.from("profiles").select("id,username,bio,avatar_url,role").in("id",clean);if(error)throw error;return Object.fromEntries((data||[]).map(p=>[p.id,p]));}
-  async function ensureProfile(){
-    const {data,error}=await db.from("profiles").select("id,username,bio,avatar_url,role").eq("id",user.id).maybeSingle();
-    if(error)throw error;
-    if(data){profile=data;return;}
-    const username=(user.user_metadata?.username||user.email?.split("@")[0]||"Player").slice(0,24);
-    const {data:created,error:createError}=await db.from("profiles").insert({id:user.id,username,bio:"",role:"member"}).select().single();
-    if(createError)throw createError;profile=created;
+  const $=id=>document.getElementById(id);
+  let currentUser=null;
+  let communityChannel=null;
+
+  function status(message){$("herro-status").textContent=message}
+
+  async function getUsernames(ids){
+    const unique=[...new Set(ids.filter(Boolean))];
+    if(!unique.length)return {};
+    const {data,error}=await db.from("profiles").select("id,username").in("id",unique);
+    if(error){console.error("Username lookup:",error);return {}}
+    const names={};
+    (data||[]).forEach(p=>names[p.id]=p.username||"Player");
+    return names;
   }
-  async function refresh(){
-    const {data,error}=await db.auth.getUser();if(error)throw error;user=data.user;
-    $("herro-auth").hidden=!!user;$("herro-member").hidden=!user;
-    if(!user){
-      if(chatChannel){await db.removeChannel(chatChannel);chatChannel=null;}
-      if(dmChannel){await db.removeChannel(dmChannel);dmChannel=null;}
-      activeDmUser=null;
+
+  async function refreshAccount(){
+    const {data,error}=await db.auth.getUser();
+    if(error){status(error.message);return}
+    currentUser=data.user||null;
+    $("herro-account").hidden=!!currentUser;
+    $("herro-logged-in").hidden=!currentUser;
+
+    if(!currentUser){
+      $("herro-players").replaceChildren();
+      $("herro-requests").replaceChildren();
+      $("herro-friends").replaceChildren();
+      $("herro-chat").replaceChildren();
       return;
     }
-    await ensureProfile();
-    $("herro-my-name").textContent=profile.username||"Player";
-    $("herro-my-role").textContent=roleLabel(profile.role);
-    avatar($("herro-my-avatar"),profile.avatar_url,profile.username);
-    $("herro-edit-name").value=profile.username||"";$("herro-bio").value=profile.bio||"";
-    await Promise.all([loadPlayers(),loadRequests(),loadFriends(),loadDmFriends(),loadAchievements(),loadChat()]);
-    if(!chatChannel){chatChannel=db.channel("herro-chat-live").on("postgres_changes",{event:"*",schema:"public",table:"chat_messages"},()=>loadChat()).subscribe();}
-    if(!dmChannel){dmChannel=db.channel("herro-dm-live").on("postgres_changes",{event:"*",schema:"public",table:"direct_messages"},()=>{if(activeDmUser)loadDmThread(activeDmUser);}).subscribe();}
+
+    const {data:profile,error:profileError}=await db.from("profiles").select("username").eq("id",currentUser.id).single();
+    if(profileError)console.error("Profile lookup:",profileError);
+    $("herro-current-user").textContent=profile?.username||currentUser.email||"Player";
+
+    await Promise.all([loadPlayers(),loadFriendRequests(),loadFriends(),loadChat()]);
   }
+
   $("herro-signup").onclick=async()=>{
-    const username=$("herro-username").value.trim(),email=$("herro-email").value.trim(),password=$("herro-password").value;
-    if(!username||!email||password.length<8){say("herro-auth-status","Enter a username, email, and password with at least 8 characters.");return;}
-    const {data,error}=await db.auth.signUp({email,password,options:{data:{username}}});
-    if(error){say("herro-auth-status",error.message);return;}
-    if(data.session){user=data.user;try{await ensureProfile();await refresh();}catch(e){say("herro-auth-status",e.message);}}
-    else say("herro-auth-status","Account created! Check your email to verify it, then log in.");
+    const username=$("herro-username").value.trim();
+    const email=$("herro-email").value.trim();
+    const password=$("herro-password").value;
+    if(!username||!email||password.length<8)return status("Enter a username, email, and password (8+ characters).");
+    if(username.length>24)return status("Username must be 24 characters or less.");
+
+    const {error}=await db.auth.signUp({email,password,options:{data:{username}}});
+    if(error)return status(error.message);
+    status("Account created! Check your email if verification is required.");
+    await refreshAccount();
   };
-  $("herro-login").onclick=async()=>{const {error}=await db.auth.signInWithPassword({email:$("herro-email").value.trim(),password:$("herro-password").value});if(error){say("herro-auth-status",error.message);return;}try{await refresh();}catch(e){say("herro-auth-status",e.message);}};
-  $("herro-logout").onclick=async()=>{const {error}=await db.auth.signOut();if(error){say("herro-auth-status",error.message);return;}profile=null;await refresh();};
+
+  $("herro-login").onclick=async()=>{
+    const {error}=await db.auth.signInWithPassword({email:$("herro-email").value.trim(),password:$("herro-password").value});
+    if(error)return status(error.message);
+    status("Welcome back!");
+    await refreshAccount();
+  };
+
+  $("herro-logout").onclick=async()=>{
+    await db.auth.signOut();
+    location.reload();
+  };
+
   async function loadPlayers(){
-    const {data,error}=await db.from("profiles").select("id,username,bio,avatar_url,role").order("username").limit(100);if(error){$("herro-players").textContent=error.message;return;}
-    const host=$("herro-players");host.replaceChildren();(data||[]).filter(p=>p.id!==user.id).forEach(p=>{
-      const card=el("div","herro-person"),head=el("div","herro-person-head"),pic=el("img","herro-avatar");avatar(pic,p.avatar_url,p.username);const details=el("div");const name=el("div","herro-name",p.username||"Player");name.append(el("span","herro-role",roleLabel(p.role)));details.append(name,el("div","herro-muted",p.bio||"HERRO player"));head.append(pic,details);card.append(head);
-      const add=el("button","herro-btn","Add Friend");add.type="button";add.onclick=()=>sendRequest(p.id);card.append(add);host.append(card);
-    });if(!host.children.length)host.textContent="No other players yet. Share HERRO with a friend!";
-  }
-  async function sendRequest(id){const {data:rows,error}=await db.from("friend_requests").select("id,requester_id,addressee_id,status").or(`and(requester_id.eq.${user.id},addressee_id.eq.${id}),and(requester_id.eq.${id},addressee_id.eq.${user.id})`);if(error){alert(error.message);return;}if((rows||[]).some(r=>r.status==="accepted")){alert("You're already friends!");return;}if((rows||[]).some(r=>r.status==="pending")){alert("A friend request is already pending.");return;}const {error:insertError}=await db.from("friend_requests").insert({requester_id:user.id,addressee_id:id,status:"pending"});if(insertError){alert(insertError.message);return;}await loadRequests();alert("Friend request sent!");}
-  async function loadRequests(){const [{data:incoming,error:e1},{data:outgoing,error:e2}]=await Promise.all([db.from("friend_requests").select("id,requester_id,created_at").eq("addressee_id",user.id).eq("status","pending").order("created_at",{ascending:false}),db.from("friend_requests").select("id,addressee_id,created_at").eq("requester_id",user.id).eq("status","pending").order("created_at",{ascending:false})]);const host=$("herro-requests");host.replaceChildren();if(e1||e2){host.textContent=(e1||e2).message;return;}const ids=[...(incoming||[]).map(x=>x.requester_id),...(outgoing||[]).map(x=>x.addressee_id)],profiles=await getProfiles(ids);(incoming||[]).forEach(r=>{const card=el("div","herro-item"),name=el("strong",null,profiles[r.requester_id]?.username||"Player"),accept=el("button","herro-btn","Accept"),decline=el("button","herro-btn secondary","Decline");accept.onclick=()=>respond(r.id,"accepted");decline.onclick=()=>respond(r.id,"declined");card.append(name,el("div","herro-muted"," wants to be your friend"),accept,decline);host.append(card);});(outgoing||[]).forEach(r=>host.append(el("div","herro-item","Request sent to "+(profiles[r.addressee_id]?.username||"Player"))));if(!host.children.length)host.textContent="No pending friend requests.";}
-  async function respond(id,status){const {error}=await db.from("friend_requests").update({status}).eq("id",id).eq("addressee_id",user.id).eq("status","pending");if(error){alert(error.message);return;}await Promise.all([loadRequests(),loadFriends()]);}
- async function loadFriends(){
-  const token = ++friendsLoadToken;
-
-  const {data,error}=await db.from("friend_requests")
-    .select("id,requester_id,addressee_id")
-    .eq("status","accepted")
-    .or(`requester_id.eq.${user.id},addressee_id.eq.${user.id}`)
-    .order("created_at",{ascending:false});
-
-  const host=$("herro-friends");
-
-  if(token !== friendsLoadToken) return;
-
-  if(error){
-    host.textContent=error.message;
-    return;
+    const {data,error}=await db.from("profiles").select("id,username,bio,avatar_url,role").order("username").limit(100);
+    if(error){$("herro-players").textContent=error.message;return}
+    const host=$("herro-players");host.replaceChildren();
+    const seen=new Set();
+    (data||[]).forEach(player=>{
+      if(player.id===currentUser.id||seen.has(player.id))return;
+      seen.add(player.id);
+      const card=document.createElement("div");card.className="herro-message";
+      card.style.cursor="pointer";card.title="View player profile";
+      const name=document.createElement("strong");name.textContent=player.username||"Player";
+      const bio=document.createElement("p");bio.textContent=player.bio||"HERRO player";
+      card.append(name,bio);
+      card.addEventListener("click",()=>openPlayerProfile(player.id));
+      const add=document.createElement("button");add.textContent="Add Friend";
+      add.onclick=e=>{e.stopPropagation();sendFriendRequest(player.id)};
+      const report=document.createElement("button");report.textContent="Report Player";
+      report.onclick=e=>{e.stopPropagation();reportPlayer(player.id)};
+      card.append(add,report);host.append(card);
+    });
+    if(!host.children.length)host.textContent="No other players yet.";
   }
 
-  const uniqueFriends = new Map();
+  async function openPlayerProfile(playerId){
+    const modal=$("herro-profile-modal");
+    $("herro-profile-name").textContent="Loading...";
+    $("herro-profile-role").textContent="";
+    $("herro-profile-bio").textContent="";
+    $("herro-profile-achievements").textContent="Loading achievements...";
+    $("herro-profile-status").textContent="";
+    $("herro-profile-add").hidden=playerId===currentUser.id;
+    $("herro-profile-report").hidden=playerId===currentUser.id;
+    if(!modal.open)modal.showModal();
+    const {data:p,error}=await db.from("profiles").select("id,username,bio,avatar_url,role").eq("id",playerId).single();
+    if(error){$("herro-profile-name").textContent="Could not load profile";$("herro-profile-bio").textContent=error.message;return}
+    $("herro-profile-name").textContent=p.username||"Player";
+    $("herro-profile-role").textContent=(p.role||"member").toUpperCase();
+    $("herro-profile-bio").textContent=p.bio||"This player hasn't written a bio yet.";
+    const avatar=$("herro-profile-avatar");avatar.replaceChildren();
+    if(p.avatar_url){const img=document.createElement("img");img.src=p.avatar_url;img.alt="";img.style="width:100%;height:100%;object-fit:cover;border-radius:50%";avatar.append(img)}
+    else avatar.textContent=(p.username||"?").slice(0,1).toUpperCase();
+    $("herro-profile-add").onclick=()=>sendFriendRequest(playerId);
+    $("herro-profile-report").onclick=()=>reportPlayer(playerId);
+    const {data:achievements,error:achError}=await db.from("profile_achievements").select("title,description,icon").eq("user_id",playerId).order("created_at",{ascending:false});
+    const list=$("herro-profile-achievements");list.replaceChildren();
+    if(achError)list.textContent="Achievements are unavailable.";
+    else if(!achievements||!achievements.length)list.textContent="No achievements yet.";
+    else achievements.forEach(a=>{const row=document.createElement("div");row.className="herro-message";row.textContent=(a.icon||"🏆")+" "+(a.title||"Achievement")+(a.description?" — "+a.description:"");list.append(row)});
+  }
+  $("herro-profile-close").onclick=()=>$("herro-profile-modal").close();
 
-  (data||[]).forEach(r=>{
-    const id = r.requester_id===user.id
-      ? r.addressee_id
-      : r.requester_id;
+  async function sendFriendRequest(userId){
+    if(!currentUser||userId===currentUser.id)return;
 
-    if(id && !uniqueFriends.has(id)){
-      uniqueFriends.set(id,r);
+    const {data:existing,error:checkError}=await db.from("friend_requests")
+      .select("id,requester_id,addressee_id,status")
+      .or(`and(requester_id.eq.${currentUser.id},addressee_id.eq.${userId}),and(requester_id.eq.${userId},addressee_id.eq.${currentUser.id})`);
+
+    if(checkError){alert("Couldn't check friend requests: "+checkError.message);return}
+
+    const active=(existing||[]).find(r=>r.status==="pending"||r.status==="accepted");
+    if(active){
+      if(active.status==="accepted")alert("You're already friends!");
+      else if(active.requester_id===currentUser.id)alert("You've already sent this player a request.");
+      else alert("This player already sent you a request. Check Friend Requests!");
+      return;
     }
-  });
 
-  const ids=[...uniqueFriends.keys()];
-  const profiles=await getProfiles(ids);
+    for(const old of (existing||[])){
+      const {error}=await db.from("friend_requests").delete().eq("id",old.id);
+      if(error){alert("Couldn't reset the old request: "+error.message);return}
+    }
 
-  if(token !== friendsLoadToken) return;
+    const {error}=await db.from("friend_requests").insert({
+      requester_id:currentUser.id,
+      addressee_id:userId,
+      status:"pending"
+    });
 
-  host.replaceChildren();
+    if(error){alert("Couldn't send request: "+error.message);return}
+    alert("Friend request sent!");
+    await loadFriendRequests();
+  }
 
-  ids.forEach(id=>{
-    const r=uniqueFriends.get(id);
-    const p=profiles[id]||{};
-    const card=el("div","herro-person");
-    const head=el("div","herro-person-head");
-    const pic=el("img","herro-avatar");
+  async function loadFriendRequests(){
+    if(!currentUser)return;
 
-    avatar(pic,p.avatar_url,p.username);
-    head.append(pic,el("strong","herro-name",p.username||"Player"));
+    const {data:incoming,error}=await db.from("friend_requests")
+      .select("id,requester_id,created_at")
+      .eq("addressee_id",currentUser.id)
+      .eq("status","pending")
+      .order("created_at",{ascending:false});
 
-    const message=el("button","herro-btn","Message");
-    message.onclick=()=>openDm(id,p.username);
+    if(error){$("herro-requests").textContent=error.message;return}
 
-    const remove=el("button","herro-btn secondary","Remove friend");
-    remove.onclick=async()=>{
-      if(!confirm("Remove this friend?"))return;
+    const {data:outgoing,error:outgoingError}=await db.from("friend_requests")
+      .select("id,addressee_id,created_at")
+      .eq("requester_id",currentUser.id)
+      .eq("status","pending")
+      .order("created_at",{ascending:false});
 
-      const {error}=await db.from("friend_requests")
-        .delete().eq("id",r.id);
+    if(outgoingError){$("herro-requests").textContent=outgoingError.message;return}
 
-      if(error){
-        alert(error.message);
-      }else{
-        await loadFriends();
-        await loadDmFriends();
+    const names=await getUsernames([
+      ...(incoming||[]).map(r=>r.requester_id),
+      ...(outgoing||[]).map(r=>r.addressee_id)
+    ]);
 
-        if(activeDmUser===id){
-          activeDmUser=null;
-          $("herro-dm-thread").textContent="Friend removed. Choose another friend.";
-          $("herro-dm-input").disabled=true;
-          $("herro-dm-send").disabled=true;
-        }
+    $("herro-requests").replaceChildren();
+
+    if(!incoming.length&&!outgoing.length){
+      $("herro-requests").textContent="No pending friend requests.";
+      return;
+    }
+
+    incoming.forEach(request=>{
+      const card=document.createElement("div");card.className="herro-message";
+      const name=document.createElement("strong");name.textContent=names[request.requester_id]||"Player";
+      const accept=document.createElement("button");accept.textContent="Accept";
+      accept.onclick=()=>respondToRequest(request.id,"accepted");
+      const decline=document.createElement("button");decline.textContent="Decline";
+      decline.onclick=()=>respondToRequest(request.id,"declined");
+      card.append(name,document.createTextNode(" wants to be your friend "),accept,decline);
+      $("herro-requests").append(card);
+    });
+
+    outgoing.forEach(request=>{
+      const card=document.createElement("div");card.className="herro-message";
+      card.textContent="Request sent to "+(names[request.addressee_id]||"Player")+" — waiting for response.";
+      $("herro-requests").append(card);
+    });
+  }
+
+  async function respondToRequest(id,response){
+    if(!currentUser||!["accepted","declined"].includes(response))return;
+
+    const {error}=await db.from("friend_requests")
+      .update({status:response})
+      .eq("id",id)
+      .eq("addressee_id",currentUser.id)
+      .eq("status","pending");
+
+    if(error){alert("Couldn't update request: "+error.message);return}
+    await loadFriendRequests();
+    await loadFriends();
+  }
+
+  async function loadFriends(){
+    if(!currentUser)return;
+
+    const {data,error}=await db.from("friend_requests")
+      .select("id,requester_id,addressee_id,created_at")
+      .eq("status","accepted")
+      .or(`requester_id.eq.${currentUser.id},addressee_id.eq.${currentUser.id}`)
+      .order("created_at",{ascending:false});
+
+    if(error){$("herro-friends").textContent=error.message;return}
+
+    const rows=data||[];
+    const friendIds=rows.map(r=>r.requester_id===currentUser.id?r.addressee_id:r.requester_id);
+    const names=await getUsernames(friendIds);
+    $("herro-friends").replaceChildren();
+
+    if(!rows.length){$("herro-friends").textContent="You haven't added any friends yet.";return}
+
+    rows.forEach(request=>{
+      const friendId=request.requester_id===currentUser.id?request.addressee_id:request.requester_id;
+      const card=document.createElement("div");card.className="herro-message";
+      const name=document.createElement("strong");name.textContent=names[friendId]||"Player";
+      const remove=document.createElement("button");remove.textContent="Remove Friend";
+      remove.onclick=()=>removeFriend(request.id);
+      card.append(name,remove);
+      $("herro-friends").append(card);
+    });
+  }
+
+  async function removeFriend(id){
+    if(!confirm("Remove this friend?"))return;
+    const {error}=await db.from("friend_requests").delete().eq("id",id);
+    if(error){alert("Couldn't remove friend: "+error.message);return}
+    await loadFriends();
+    await loadFriendRequests();
+  }
+
+  async function reportPlayer(userId){
+    const reason=prompt("Why are you reporting this player?");
+    if(!reason)return;
+    const {error}=await db.from("user_reports").insert({
+      reporter_id:currentUser.id,
+      reported_user_id:userId,
+      reason:reason.slice(0,100)
+    });
+    alert(error?"Report failed: "+error.message:"Report submitted.");
+  }
+
+  async function loadChat(){
+    if(!currentUser)return;
+    const {data,error}=await db.from("chat_messages")
+      .select("id,user_id,message,created_at,profiles(username)")
+      .order("created_at",{ascending:true})
+      .limit(100);
+
+    if(error){$("herro-chat-status").textContent=error.message;return}
+    $("herro-chat").replaceChildren();
+
+    (data||[]).forEach(msg=>{
+      const item=document.createElement("div");item.className="herro-message";
+      const name=document.createElement("strong");name.textContent=msg.profiles?.username||"Player";
+      const content=document.createElement("p");content.textContent=msg.message;
+      item.append(name,content);
+
+      if(msg.user_id!==currentUser.id){
+        const report=document.createElement("button");report.textContent="Report";
+        report.onclick=async()=>{
+          const reason=prompt("Why report this message?");
+          if(!reason)return;
+          const {error}=await db.from("user_reports").insert({
+            reporter_id:currentUser.id,
+            reported_user_id:msg.user_id,
+            message_id:msg.id,
+            reason:reason.slice(0,100)
+          });
+          alert(error?"Report failed: "+error.message:"Report submitted.");
+        };
+        item.append(report);
       }
-    };
+      $("herro-chat").append(item);
+    });
 
-    card.append(head,message,remove);
-    host.append(card);
+    $("herro-chat").scrollTop=$("herro-chat").scrollHeight;
+  }
+
+  $("herro-send").onclick=async()=>{
+    const input=$("herro-chat-input");
+    const message=input.value.trim();
+    if(!message||!currentUser)return;
+    $("herro-chat-status").textContent="Sending...";
+    const {error}=await db.from("chat_messages").insert({user_id:currentUser.id,message});
+    if(error){$("herro-chat-status").textContent=error.message;return}
+    input.value="";
+    $("herro-chat-status").textContent="";
+    await loadChat();
+  };
+
+  $("herro-chat-input").addEventListener("keydown",e=>{
+    if(e.key==="Enter")$("herro-send").click();
   });
 
-  if(!ids.length){
-    host.textContent="You haven't added any friends yet.";
-  }
-} async function loadDmFriends(){
-    if(!user)return;
-    const {data,error}=await db.from("friend_requests").select("requester_id,addressee_id").eq("status","accepted").or(`requester_id.eq.${user.id},addressee_id.eq.${user.id}`);
-    const host=$("herro-dm-list");
-    host.replaceChildren();
-    if(error){host.textContent="Could not load friends: "+error.message;return;}
-    const ids=[...new Set((data||[]).map(r=>r.requester_id===user.id?r.addressee_id:r.requester_id))];
-    let profiles={};
-    try{profiles=await getProfiles(ids);}catch(e){host.textContent=e.message;return;}
-    ids.forEach(id=>{
-      const p=profiles[id]||{};
-      const b=el("button","herro-dm-user",p.username||"Player");
-      b.type="button";
-      if(activeDmUser===id)b.classList.add("active");
-      b.onclick=()=>openDm(id,p.username);
-      host.append(b);
-    });
-    if(!ids.length)host.textContent="Add friends to start private conversations.";
-  }
+  db.channel("herro-live-chat")
+    .on("postgres_changes",{event:"*",schema:"public",table:"chat_messages"},loadChat)
+    .subscribe();
 
-  async function openDm(id,name){
-    activeDmUser=id;
-    $("herro-dm-input").disabled=false;
-    $("herro-dm-send").disabled=false;
-    $("herro-dm-input").placeholder="Message "+(name||"your friend")+"...";
-    await loadDmFriends();
-    await loadDmThread(id);
-    $("herro-dm-input").focus();
-  }
+  db.auth.onAuthStateChange(()=>{
+    setTimeout(refreshAccount,0);
+  });
 
-  async function loadDmThread(id){
-    if(!user||!id)return;
-    const {data,error}=await db.from("direct_messages")
-      .select("id,sender_id,recipient_id,message,created_at")
-      .or(`and(sender_id.eq.${user.id},recipient_id.eq.${id}),and(sender_id.eq.${id},recipient_id.eq.${user.id})`)
-      .order("created_at",{ascending:true}).limit(200);
-    const host=$("herro-dm-thread");
-    if(error){host.textContent="Could not load messages: "+error.message;say("herro-dm-status",error.message);return;}
-    host.replaceChildren();
-    let profiles={};
-    try{profiles=await getProfiles([id,user.id]);}catch(e){host.textContent=e.message;return;}
-    (data||[]).forEach(m=>{
-      const mine=m.sender_id===user.id;
-      const node=el("div","herro-dm-message"+(mine?" mine":""));
-      const who=mine?"You":(profiles[id]?.username||"Friend");
-      const when=m.created_at?new Date(m.created_at).toLocaleString():"";
-      node.append(el("small",null,who+(when?" · "+when:"")),el("div",null,m.message));
-      host.append(node);
-    });
-    if(!host.children.length)host.textContent="No messages yet. Say hey!";
-    host.scrollTop=host.scrollHeight;
-  }
-
-  async function sendDm(){
-    if(!user||!activeDmUser)return;
-    const input=$("herro-dm-input"),message=input.value.trim();
-    if(!message)return;
-    if(message.length>1000){say("herro-dm-status","Messages must be 1,000 characters or less.");return;}
-    say("herro-dm-status","Sending...");
-    const {error}=await db.from("direct_messages").insert({
-      sender_id:user.id,recipient_id:activeDmUser,message
-    });
-    if(error){say("herro-dm-status",error.message);return;}
-    input.value="";
-    say("herro-dm-status","");
-    await loadDmThread(activeDmUser);
-  }
-
-  $("herro-dm-send").onclick=sendDm;
-  $("herro-dm-input").addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey){e.preventDefault();sendDm();}});
-  async function loadAchievements(){const {data,error}=await db.from("profile_achievements").select("id,title,description,icon,created_at").eq("user_id",user.id).order("created_at",{ascending:false});const host=$("herro-achievements");host.replaceChildren();if(error){host.textContent=error.message;return;} (data||[]).forEach(a=>{const item=el("div","herro-item herro-achievement");item.append(el("span","herro-achievement-icon",a.icon||"🏆"));const info=el("div");info.append(el("strong",null,a.title),el("div","herro-muted",a.description||"Achievement unlocked"));item.append(info);host.append(item);});if(!host.children.length)host.textContent="No achievements yet. Keep playing!";}
-  $("herro-save-profile").onclick=async()=>{const username=$("herro-edit-name").value.trim(),bio=$("herro-bio").value.trim(),file=$("herro-avatar-file").files[0];if(!username||username.length>24){say("herro-profile-status","Display name must be 1–24 characters.");return;}let avatarUrl=profile.avatar_url||null;if(file){if(file.size>4*1024*1024){say("herro-profile-status","Avatar must be 4 MB or smaller.");return;}const ext=(file.name.split(".").pop()||"png").toLowerCase().replace(/[^a-z0-9]/g,"");const path=`${user.id}/avatar-${Date.now()}.${ext}`;const {error:uploadError}=await db.storage.from("profile-images").upload(path,file,{upsert:true,contentType:file.type});if(uploadError){say("herro-profile-status",uploadError.message);return;}const {data}=db.storage.from("profile-images").getPublicUrl(path);avatarUrl=data.publicUrl;}
-    const {error}=await db.from("profiles").update({username,bio,avatar_url:avatarUrl}).eq("id",user.id);if(error){say("herro-profile-status",error.message);return;}say("herro-profile-status","Profile saved!");await refresh();
-  };
-  async function loadChat(){const {data,error}=await db.from("chat_messages").select("id,user_id,message,created_at,profiles(username,role)").order("created_at",{ascending:true}).limit(100);const host=$("herro-chat");if(error){say("herro-chat-status",error.message);return;}host.replaceChildren();(data||[]).forEach(m=>{const line=el("div","herro-chat-line"),head=el("strong",null,m.profiles?.username||"Player");head.append(el("span","herro-role",roleLabel(m.profiles?.role)));line.append(head,el("p",null,m.message));host.append(line);});host.scrollTop=host.scrollHeight;}
-  async function sendChat(){const input=$("herro-chat-input"),message=input.value.trim();if(!message)return;say("herro-chat-status","Sending...");const {error}=await db.from("chat_messages").insert({user_id:user.id,message});if(error){say("herro-chat-status",error.message);return;}input.value="";say("herro-chat-status","");await loadChat();}
-  $("herro-send").onclick=sendChat;$("herro-chat-input").addEventListener("keydown",e=>{if(e.key==="Enter")sendChat();});
-  db.auth.onAuthStateChange(()=>{setTimeout(()=>refresh().catch(e=>say("herro-auth-status",e.message)),0);});
-  try{await refresh();}catch(e){say("herro-auth-status","Community setup issue: "+e.message);console.error(e);}
+  await refreshAccount();
 })();
 </script>
+
+<!-- HERRO COMMUNITY -->
+<style>
+#herro-community {
+  background: #15151d;
+  color: white;
+  padding: 22px;
+  margin: 25px auto;
+  max-width: 850px;
+  border: 1px solid #343444;
+  border-radius: 14px;
+  font-family: Arial, sans-serif;
+}
+#herro-community input,
+#herro-community textarea {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 11px;
+  margin: 5px 0;
+  border: 1px solid #444;
+  border-radius: 7px;
+  background: #22222d;
+  color: white;
+}
+#herro-community button {
+  background: #7548ed;
+  color: white;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 14px;
+  margin: 4px;
+  cursor: pointer;
+}
+#herro-community button:hover { opacity: .8; }
+#herro-chat {
+  height: 280px;
+  overflow-y: auto;
+  background: #101017;
+  padding: 12px;
+  border-radius: 8px;
+  margin: 12px 0;
+}
+.herro-message {
+  padding: 9px;
+  border-bottom: 1px solid #30303a;
+  overflow-wrap: anywhere;
+}
+.herro-muted { color: #aaa; font-size: 12px; }
+#herro-community h2 { margin-top: 8px; }
+</style>
+
+<section id="herro-community">
+  <h2>HERRO Community</h2>
+
+  <div id="herro-account">
+    <h3>Login or Create Account</h3>
+    <input id="herro-username" placeholder="Username">
+    <input id="herro-email" type="email" placeholder="Email">
+    <input id="herro-password" type="password" placeholder="Password">
+    <button id="herro-signup">Create Account</button>
+    <button id="herro-login">Login</button>
+    <p id="herro-status" class="herro-muted">Sign in to join the community.</p>
+  </div>
+
+  <div id="herro-logged-in" hidden>
+    <p>Logged in as <strong id="herro-current-user"></strong></p>
+    <button id="herro-logout">Log Out</button>
+
+    <h3>Player Directory</h3>
+    <div id="herro-players"></div>
+
+    <h3>Friend Requests</h3>
+    <div id="herro-requests"></div>
+
+    <h3>Friends</h3>
+    <div id="herro-friends"></div>
+
+    <h3>Global Chat</h3>
+    <div id="herro-chat"></div>
+    <input id="herro-chat-input" maxlength="1000" placeholder="Write a message...">
+    <button id="herro-send">Send Message</button>
+    <p id="herro-chat-status" class="herro-muted"></p>
+  </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async function () {
+  const SUPABASE_URL = "https://gzudlkjghmplvgayayfo.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_hn2RubwgRir3_hvE6T91bg_ajhPeEOk";
+
+  const db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+  const $ = id => document.getElementById(id);
+  let currentUser = null;
+
+  function status(message) {
+    $("herro-status").textContent = message;
+  }
+
+  async function refreshAccount() {
+    const { data } = await db.auth.getUser();
+    currentUser = data.user;
+
+    $("herro-account").hidden = !!currentUser;
+    $("herro-logged-in").hidden = !currentUser;
+
+    if (!currentUser) return;
+
+    const { data: profile } = await db
+      .from("profiles")
+      .select("username")
+      .eq("id", currentUser.id)
+      .single();
+
+    $("herro-current-user").textContent =
+      profile?.username || currentUser.email;
+
+    await Promise.all([
+      loadPlayers(),
+      loadFriendRequests(),
+      loadFriends(),
+      loadChat()
+    ]);
+  }
+
+  $("herro-signup").onclick = async () => {
+    const username = $("herro-username").value.trim();
+    const email = $("herro-email").value.trim();
+    const password = $("herro-password").value;
+
+    if (!username || !email || password.length < 8) {
+      return status("Enter a username, email, and password (8+ characters).");
+    }
+
+    const { error } = await db.auth.signUp({
+      email,
+      password,
+      options: { data: { username } }
+    });
+
+    if (error) return status(error.message);
+
+    status("Account created! Check your email if verification is required.");
+    await refreshAccount();
+  };
+
+  $("herro-login").onclick = async () => {
+    const { error } = await db.auth.signInWithPassword({
+      email: $("herro-email").value.trim(),
+      password: $("herro-password").value
+    });
+
+    if (error) return status(error.message);
+
+    status("Welcome back!");
+    await refreshAccount();
+  };
+
+  $("herro-logout").onclick = async () => {
+    await db.auth.signOut();
+    location.reload();
+  };
+
+  async function getUsernames(ids) {
+    const unique = [...new Set(ids.filter(Boolean))];
+    if (!unique.length) return {};
+
+    const { data, error } = await db
+      .from("profiles")
+      .select("id, username")
+      .in("id", unique);
+
+    if (error) {
+      console.error(error);
+      return {};
+    }
+
+    const names = {};
+    (data || []).forEach(p => {
+      names[p.id] = p.username || "Player";
+    });
+    return names;
+  }
+
+  async function loadPlayers() {
+    const { data, error } = await db
+      .from("profiles")
+      .select("id, username, bio")
+      .limit(100);
+
+    if (error) {
+      $("herro-players").textContent = error.message;
+      return;
+    }
+
+    $("herro-players").replaceChildren();
+
+    (data || []).forEach(player => {
+      const card = document.createElement("div");
+      card.className = "herro-message";
+
+      const name = document.createElement("strong");
+      name.textContent = player.username || "Player";
+
+      const bio = document.createElement("p");
+      bio.textContent = player.bio || "HERRO player";
+
+      card.append(name, bio);
+
+      if (player.id !== currentUser.id) {
+        const add = document.createElement("button");
+        add.textContent = "Add Friend";
+        add.onclick = () => sendFriendRequest(player.id);
+
+        const report = document.createElement("button");
+        report.textContent = "Report Player";
+        report.onclick = () => reportPlayer(player.id);
+
+        card.append(add, report);
+      }
+
+      $("herro-players").append(card);
+    });
+  }
+
+  async function sendFriendRequest(userId) {
+    if (!currentUser || userId === currentUser.id) return;
+
+    const { data: existing, error: checkError } = await db
+      .from("friend_requests")
+      .select("id, requester_id, addressee_id, status")
+      .or(
+        `and(requester_id.eq.${currentUser.id},addressee_id.eq.${userId}),and(requester_id.eq.${userId},addressee_id.eq.${currentUser.id})`
+      );
+
+    if (checkError) {
+      alert("Couldn't check friend requests: " + checkError.message);
+      return;
+    }
+
+    const active = (existing || []).find(
+      r => r.status === "pending" || r.status === "accepted"
+    );
+
+    if (active) {
+      if (active.status === "accepted") {
+        alert("You're already friends!");
+      } else if (active.requester_id === currentUser.id) {
+        alert("You've already sent this player a request.");
+      } else {
+        alert("This player already sent you a request. Check Friend Requests!");
+      }
+      return;
+    }
+
+    for (const old of (existing || [])) {
+      const { error } = await db
+        .from("friend_requests")
+        .delete()
+        .eq("id", old.id);
+
+      if (error) {
+        alert("Couldn't reset the old request: " + error.message);
+        return;
+      }
+    }
+
+    const { error } = await db.from("friend_requests").insert({
+      requester_id: currentUser.id,
+      addressee_id: userId,
+      status: "pending"
+    });
+
+    if (error) {
+      alert("Couldn't send request: " + error.message);
+      return;
+    }
+
+    alert("Friend request sent!");
+    await loadFriendRequests();
+  }
+
+  async function loadFriendRequests() {
+    if (!currentUser) return;
+
+    const { data: incoming, error } = await db
+      .from("friend_requests")
+      .select("id, requester_id, created_at")
+      .eq("addressee_id", currentUser.id)
+      .eq("status", "pending")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      $("herro-requests").textContent = error.message;
+      return;
+    }
+
+    const { data: outgoing, error: outgoingError } = await db
+      .from("friend_requests")
+      .select("id, addressee_id, created_at")
+      .eq("requester_id", currentUser.id)
+      .eq("status", "pending")
+      .order("created_at", { ascending: false });
+
+    if (outgoingError) {
+      $("herro-requests").textContent = outgoingError.message;
+      return;
+    }
+
+    const names = await getUsernames([
+      ...(incoming || []).map(r => r.requester_id),
+      ...(outgoing || []).map(r => r.addressee_id)
+    ]);
+
+    $("herro-requests").replaceChildren();
+
+    if (!incoming.length && !outgoing.length) {
+      $("herro-requests").textContent = "No pending friend requests.";
+      return;
+    }
+
+    (incoming || []).forEach(request => {
+      const card = document.createElement("div");
+      card.className = "herro-message";
+
+      const name = document.createElement("strong");
+      name.textContent = names[request.requester_id] || "Player";
+
+      const accept = document.createElement("button");
+      accept.textContent = "Accept";
+      accept.onclick = () => respondToRequest(request.id, "accepted");
+
+      const decline = document.createElement("button");
+      decline.textContent = "Decline";
+      decline.onclick = () => respondToRequest(request.id, "declined");
+
+      card.append(
+        name,
+        document.createTextNode(" wants to be your friend "),
+        accept,
+        decline
+      );
+
+      $("herro-requests").append(card);
+    });
+
+    (outgoing || []).forEach(request => {
+      const card = document.createElement("div");
+      card.className = "herro-message";
+      card.textContent =
+        "Request sent to " +
+        (names[request.addressee_id] || "Player") +
+        " — waiting for response.";
+
+      $("herro-requests").append(card);
+    });
+  }
+
+  async function respondToRequest(id, response) {
+    if (!currentUser || !["accepted", "declined"].includes(response)) return;
+
+    const { error } = await db
+      .from("friend_requests")
+      .update({ status: response })
+      .eq("id", id)
+      .eq("addressee_id", currentUser.id)
+      .eq("status", "pending");
+
+    if (error) {
+      alert("Couldn't update request: " + error.message);
+      return;
+    }
+
+    await loadFriendRequests();
+    await loadFriends();
+  }
+
+  async function loadFriends() {
+    if (!currentUser) return;
+
+    const { data, error } = await db
+      .from("friend_requests")
+      .select("id, requester_id, addressee_id, created_at")
+      .eq("status", "accepted")
+      .or(
+        `requester_id.eq.${currentUser.id},addressee_id.eq.${currentUser.id}`
+      )
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      $("herro-friends").textContent = error.message;
+      return;
+    }
+
+    const rows = data || [];
+    const friendIds = rows.map(r =>
+      r.requester_id === currentUser.id ? r.addressee_id : r.requester_id
+    );
+
+    const names = await getUsernames(friendIds);
+    $("herro-friends").replaceChildren();
+
+    if (!rows.length) {
+      $("herro-friends").textContent = "You haven't added any friends yet.";
+      return;
+    }
+
+    rows.forEach(request => {
+      const friendId =
+        request.requester_id === currentUser.id
+          ? request.addressee_id
+          : request.requester_id;
+
+      const card = document.createElement("div");
+      card.className = "herro-message";
+
+      const name = document.createElement("strong");
+      name.textContent = names[friendId] || "Player";
+
+      const remove = document.createElement("button");
+      remove.textContent = "Remove Friend";
+      remove.onclick = () => removeFriend(request.id);
+
+      card.append(name, remove);
+      $("herro-friends").append(card);
+    });
+  }
+
+  async function removeFriend(id) {
+    if (!confirm("Remove this friend?")) return;
+
+    const { error } = await db
+      .from("friend_requests")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      alert("Couldn't remove friend: " + error.message);
+      return;
+    }
+
+    await loadFriends();
+    await loadFriendRequests();
+  }
+
+  async function reportPlayer(userId) {
+    const reason = prompt("Why are you reporting this player?");
+    if (!reason) return;
+
+    const { error } = await db.from("user_reports").insert({
+      reporter_id: currentUser.id,
+      reported_user_id: userId,
+      reason: reason.slice(0, 100)
+    });
+
+    alert(error ? error.message : "Report submitted.");
+  }
+
+  async function loadChat() {
+    const { data, error } = await db
+      .from("chat_messages")
+      .select("id, user_id, message, created_at, profiles(username)")
+      .order("created_at", { ascending: true })
+      .limit(100);
+
+    if (error) {
+      $("herro-chat-status").textContent = error.message;
+      return;
+    }
+
+    $("herro-chat").replaceChildren();
+
+    (data || []).forEach(msg => {
+      const item = document.createElement("div");
+      item.className = "herro-message";
+
+      const name = document.createElement("strong");
+      name.textContent = msg.profiles?.username || "Player";
+
+      const content = document.createElement("p");
+      content.textContent = msg.message;
+
+      item.append(name, content);
+
+      if (msg.user_id !== currentUser.id) {
+        const report = document.createElement("button");
+        report.textContent = "Report";
+
+        report.onclick = async () => {
+          const reason = prompt("Why report this message?");
+          if (!reason) return;
+
+          const { error } = await db.from("user_reports").insert({
+            reporter_id: currentUser.id,
+            reported_user_id: msg.user_id,
+            message_id: msg.id,
+            reason: reason.slice(0, 100)
+          });
+
+          alert(error ? error.message : "Report submitted.");
+        };
+
+        item.append(report);
+      }
+
+      $("herro-chat").append(item);
+    });
+
+    $("herro-chat").scrollTop = $("herro-chat").scrollHeight;
+  }
+
+  $("herro-send").onclick = async () => {
+    const input = $("herro-chat-input");
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    $("herro-chat-status").textContent = "Sending...";
+
+    const { error } = await db.from("chat_messages").insert({
+      user_id: currentUser.id,
+      message
+    });
+
+    if (error) {
+      $("herro-chat-status").textContent = error.message;
+      return;
+    }
+
+    input.value = "";
+    $("herro-chat-status").textContent = "";
+    await loadChat();
+  };
+
+  $("herro-chat-input").addEventListener("keydown", e => {
+    if (e.key === "Enter") $("herro-send").click();
+  });
+
+  db.channel("herro-live-chat")
+    .on("postgres_changes", {
+      event: "*",
+      schema: "public",
+      table: "chat_messages"
+    }, loadChat)
+    .subscribe();
+
+  db.auth.onAuthStateChange(() => {
+    setTimeout(refreshAccount, 0);
+  });
+
+  await refreshAccount();
+})();
+</script>
+<!-- END HERRO COMMUNITY -->
 
 </body>
 </html>
